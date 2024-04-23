@@ -37,6 +37,7 @@ public class MealPlanService {
 
     @PostConstruct
     private void init() {
+        Objects.requireNonNull(restTemplate, "restTemplate cannot be null");
         Objects.requireNonNull(spoonacularApiKey, "spoonacularApiKey cannot be null");
         Objects.requireNonNull(spoonacularBaseUrl, "spoonacularBaseUrl cannot be null");
         Objects.requireNonNull(spoonacularMealPlanUrl, "spoonacularMealPlanUrl cannot be null");
