@@ -4,23 +4,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Week {
     @JsonProperty("monday")
-    private DayResponse monday;
+    private Day monday;
     @JsonProperty("tuesday")
-    private DayResponse tuesday;
+    private Day tuesday;
     @JsonProperty("wednesday")
-    private DayResponse wednesday;
+    private Day wednesday;
     @JsonProperty("thursday")
-    private DayResponse thursday;
+    private Day thursday;
     @JsonProperty("friday")
-    private DayResponse friday;
+    private Day friday;
     @JsonProperty("saturday")
-    private DayResponse saturday;
+    private Day saturday;
     @JsonProperty("sunday")
-    private DayResponse sunday;
+    private Day sunday;
 
     @Override
     public String toString() {
-        return "WeekResponse{" +
+        return "Week{" +
                 "monday=" + monday +
                 ", tuesday=" + tuesday +
                 ", wednesday=" + wednesday +
@@ -31,59 +31,59 @@ public class Week {
                 '}';
     }
 
-    public DayResponse getMonday() {
+    public Day getMonday() {
         return monday;
     }
 
-    public void setMonday(DayResponse monday) {
+    public void setMonday(Day monday) {
         this.monday = monday;
     }
 
-    public DayResponse getTuesday() {
+    public Day getTuesday() {
         return tuesday;
     }
 
-    public void setTuesday(DayResponse tuesday) {
+    public void setTuesday(Day tuesday) {
         this.tuesday = tuesday;
     }
 
-    public DayResponse getWednesday() {
+    public Day getWednesday() {
         return wednesday;
     }
 
-    public void setWednesday(DayResponse wednesday) {
+    public void setWednesday(Day wednesday) {
         this.wednesday = wednesday;
     }
 
-    public DayResponse getThursday() {
+    public Day getThursday() {
         return thursday;
     }
 
-    public void setThursday(DayResponse thursday) {
+    public void setThursday(Day thursday) {
         this.thursday = thursday;
     }
 
-    public DayResponse getFriday() {
+    public Day getFriday() {
         return friday;
     }
 
-    public void setFriday(DayResponse friday) {
+    public void setFriday(Day friday) {
         this.friday = friday;
     }
 
-    public DayResponse getSaturday() {
+    public Day getSaturday() {
         return saturday;
     }
 
-    public void setSaturday(DayResponse saturday) {
+    public void setSaturday(Day saturday) {
         this.saturday = saturday;
     }
 
-    public DayResponse getSunday() {
+    public Day getSunday() {
         return sunday;
     }
 
-    public void setSunday(DayResponse sunday) {
+    public void setSunday(Day sunday) {
         this.sunday = sunday;
     }
 }

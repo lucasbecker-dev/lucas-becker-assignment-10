@@ -2,11 +2,9 @@ package com.coderscampus.assignment10.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-
 public class WeekResponse {
     @JsonProperty("week")
-    private List<DayResponse> week;
+    private Week week;
 
     @Override
     public String toString() {
@@ -15,11 +13,11 @@ public class WeekResponse {
                 '}';
     }
 
-    public List<DayResponse> getWeek() {
+    public Week getWeek() {
         return week;
     }
 
-    public void setWeek(List<DayResponse> week) {
+    public void setWeek(Week week) {
         this.week = week;
     }
 }
