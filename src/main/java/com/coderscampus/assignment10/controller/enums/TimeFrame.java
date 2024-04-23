@@ -1,12 +1,12 @@
 package com.coderscampus.assignment10.controller.enums;
 
-public enum TimeFrames {
+public enum TimeFrame {
     DAY("day"),
     WEEK("week");
 
     private final String displayName;
 
-    TimeFrames(String displayName) {
+    TimeFrame(String displayName) {
         this.displayName = displayName;
     }
 
