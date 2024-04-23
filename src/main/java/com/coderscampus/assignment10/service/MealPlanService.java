@@ -13,6 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class MealPlanService {
@@ -61,11 +62,12 @@ public class MealPlanService {
             URI uri = UriComponentsBuilder.fromHttpUrl(spoonacularBaseUrl + spoonacularMealPlanUrl)
                     .queryParam(API_KEY, spoonacularApiKey)
                     .queryParam(TIME_FRAME, timeFrame.toString())
-                    .queryParam(TARGET_CALORIES, numCalories)
-                    .queryParam(DIET, diet)
-                    .queryParam(EXCLUDE, exclusions)
+                    .queryParamIfPresent(TARGET_CALORIES, Optional.ofNullable(numCalories))
+                    .queryParamIfPresent(DIET, Optional.ofNullable(diet))
+                    .queryParamIfPresent(EXCLUDE, Optional.ofNullable(exclusions))
                     .build()
                     .toUri();
+            System.out.println(uri.toString());
             response = restTemplate.getForEntity(uri, responseType);
         } catch (RestClientException e) {
             System.err.println("Error getting generated meal plan from Spoonacular:\n" + e);
