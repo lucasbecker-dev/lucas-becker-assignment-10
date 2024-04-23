@@ -28,7 +28,8 @@ public class MealPlanService {
     private final String spoonacularMealPlanUrl;
 
     @Autowired
-    public MealPlanService(RestTemplate restTemplate, String spoonacularApiKey, String spoonacularBaseUrl, String spoonacularMealPlanUrl) {
+    public MealPlanService(RestTemplate restTemplate, String spoonacularApiKey, String spoonacularBaseUrl,
+            String spoonacularMealPlanUrl) {
         this.restTemplate = restTemplate;
         this.spoonacularApiKey = spoonacularApiKey;
         this.spoonacularBaseUrl = spoonacularBaseUrl;
@@ -56,8 +57,7 @@ public class MealPlanService {
             Integer numCalories,
             String diet,
             String exclusions,
-            Class<T> responseType
-    ) {
+            Class<T> responseType) {
         ResponseEntity<T> response = null;
         try {
             URI uri = UriComponentsBuilder.fromHttpUrl(spoonacularBaseUrl + spoonacularMealPlanUrl)
@@ -68,7 +68,6 @@ public class MealPlanService {
                     .queryParamIfPresent(EXCLUDE, Optional.ofNullable(exclusions))
                     .build()
                     .toUri();
-            System.out.println(uri.toString());
             response = restTemplate.getForEntity(uri, responseType);
         } catch (RestClientException e) {
             System.err.println("Error getting generated meal plan from Spoonacular:\n" + e);
