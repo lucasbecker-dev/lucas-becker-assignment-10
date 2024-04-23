@@ -3,6 +3,7 @@ package com.coderscampus.assignment10.service;
 import com.coderscampus.assignment10.controller.enums.TimeFrames;
 import com.coderscampus.assignment10.dto.DayResponse;
 import com.coderscampus.assignment10.dto.WeekResponse;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Objects;
 
 @Service
 public class MealPlanService {
@@ -20,6 +22,7 @@ public class MealPlanService {
     private final String DIET = "diet";
     private final String EXCLUDE = "exclude";
     private final RestTemplate restTemplate;
+
     @Value("${spoonacular.api.key}")
     private String spoonacularApiKey;
     @Value("${spoonacular.urls.base}")
@@ -30,6 +33,13 @@ public class MealPlanService {
     @Autowired
     public MealPlanService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
+    }
+
+    @PostConstruct
+    private void init() {
+        Objects.requireNonNull(spoonacularApiKey, "spoonacularApiKey cannot be null");
+        Objects.requireNonNull(spoonacularBaseUrl, "spoonacularBaseUrl cannot be null");
+        Objects.requireNonNull(spoonacularMealPlanUrl, "spoonacularMealPlanUrl cannot be null");
     }
 
     public ResponseEntity<WeekResponse> getWeekMeals(Integer numCalories, String diet, String exclusions) {
