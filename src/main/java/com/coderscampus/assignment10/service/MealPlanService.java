@@ -1,6 +1,6 @@
 package com.coderscampus.assignment10.service;
 
-import com.coderscampus.assignment10.controller.enums.TimeFrames;
+import com.coderscampus.assignment10.controller.enums.TimeFrame;
 import com.coderscampus.assignment10.dto.DayResponse;
 import com.coderscampus.assignment10.dto.WeekResponse;
 import jakarta.annotation.PostConstruct;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -43,26 +44,34 @@ public class MealPlanService {
     }
 
     public ResponseEntity<WeekResponse> getWeekMeals(Integer numCalories, String diet, String exclusions) {
-        URI uri = UriComponentsBuilder.fromHttpUrl(spoonacularBaseUrl + spoonacularMealPlanUrl)
-                .queryParam(API_KEY, spoonacularApiKey)
-                .queryParam(TIME_FRAME, TimeFrames.WEEK.toString())
-                .queryParam(TARGET_CALORIES, numCalories)
-                .queryParam(DIET, diet)
-                .queryParam(EXCLUDE, exclusions)
-                .build()
-                .toUri();
-        return restTemplate.getForEntity(uri, WeekResponse.class);
+        return getMealPlan(TimeFrame.WEEK, numCalories, diet, exclusions, WeekResponse.class);
     }
 
     public ResponseEntity<DayResponse> getDayMeals(Integer numCalories, String diet, String exclusions) {
-        URI uri = UriComponentsBuilder.fromHttpUrl(spoonacularBaseUrl + spoonacularMealPlanUrl)
-                .queryParam(API_KEY, spoonacularApiKey)
-                .queryParam(TIME_FRAME, TimeFrames.DAY.toString())
-                .queryParam(TARGET_CALORIES, numCalories)
-                .queryParam(DIET, diet)
-                .queryParam(EXCLUDE, exclusions)
-                .build()
-                .toUri();
-        return restTemplate.getForEntity(uri, DayResponse.class);
+        return getMealPlan(TimeFrame.DAY, numCalories, diet, exclusions, DayResponse.class);
+    }
+
+    private <T> ResponseEntity<T> getMealPlan(
+            TimeFrame timeFrame,
+            Integer numCalories,
+            String diet,
+            String exclusions,
+            Class<T> responseType
+    ) {
+        ResponseEntity<T> response = null;
+        try {
+            URI uri = UriComponentsBuilder.fromHttpUrl(spoonacularBaseUrl + spoonacularMealPlanUrl)
+                    .queryParam(API_KEY, spoonacularApiKey)
+                    .queryParam(TIME_FRAME, timeFrame.toString())
+                    .queryParam(TARGET_CALORIES, numCalories)
+                    .queryParam(DIET, diet)
+                    .queryParam(EXCLUDE, exclusions)
+                    .build()
+                    .toUri();
+            response = restTemplate.getForEntity(uri, responseType);
+        } catch (RestClientException e) {
+            System.err.println("Error getting generated meal plan from Spoonacular:\n" + e);
+        }
+        return response;
     }
 }
