@@ -2,88 +2,24 @@ package com.coderscampus.assignment10.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class WeekResponse {
-    @JsonProperty("monday")
-    private DayResponse monday;
-    @JsonProperty("tuesday")
-    private DayResponse tuesday;
-    @JsonProperty("wednesday")
-    private DayResponse wednesday;
-    @JsonProperty("thursday")
-    private DayResponse thursday;
-    @JsonProperty("friday")
-    private DayResponse friday;
-    @JsonProperty("saturday")
-    private DayResponse saturday;
-    @JsonProperty("sunday")
-    private DayResponse sunday;
+    @JsonProperty("week")
+    private List<DayResponse> week;
 
     @Override
     public String toString() {
         return "WeekResponse{" +
-                "monday=" + monday +
-                ", tuesday=" + tuesday +
-                ", wednesday=" + wednesday +
-                ", thursday=" + thursday +
-                ", friday=" + friday +
-                ", saturday=" + saturday +
-                ", sunday=" + sunday +
+                "week=" + week +
                 '}';
     }
 
-    public DayResponse getMonday() {
-        return monday;
+    public List<DayResponse> getWeek() {
+        return week;
     }
 
-    public void setMonday(DayResponse monday) {
-        this.monday = monday;
-    }
-
-    public DayResponse getTuesday() {
-        return tuesday;
-    }
-
-    public void setTuesday(DayResponse tuesday) {
-        this.tuesday = tuesday;
-    }
-
-    public DayResponse getWednesday() {
-        return wednesday;
-    }
-
-    public void setWednesday(DayResponse wednesday) {
-        this.wednesday = wednesday;
-    }
-
-    public DayResponse getThursday() {
-        return thursday;
-    }
-
-    public void setThursday(DayResponse thursday) {
-        this.thursday = thursday;
-    }
-
-    public DayResponse getFriday() {
-        return friday;
-    }
-
-    public void setFriday(DayResponse friday) {
-        this.friday = friday;
-    }
-
-    public DayResponse getSaturday() {
-        return saturday;
-    }
-
-    public void setSaturday(DayResponse saturday) {
-        this.saturday = saturday;
-    }
-
-    public DayResponse getSunday() {
-        return sunday;
-    }
-
-    public void setSunday(DayResponse sunday) {
-        this.sunday = sunday;
+    public void setWeek(List<DayResponse> week) {
+        this.week = week;
     }
 }
