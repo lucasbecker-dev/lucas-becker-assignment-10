@@ -5,7 +5,6 @@ import com.coderscampus.assignment10.dto.DayResponse;
 import com.coderscampus.assignment10.dto.WeekResponse;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -23,17 +22,16 @@ public class MealPlanService {
     private final String DIET = "diet";
     private final String EXCLUDE = "exclude";
     private final RestTemplate restTemplate;
-
-    @Value("${spoonacular.api.key}")
-    private String spoonacularApiKey;
-    @Value("${spoonacular.urls.base}")
-    private String spoonacularBaseUrl;
-    @Value("${spoonacular.urls.mealplan}")
-    private String spoonacularMealPlanUrl;
+    private final String spoonacularApiKey;
+    private final String spoonacularBaseUrl;
+    private final String spoonacularMealPlanUrl;
 
     @Autowired
-    public MealPlanService(RestTemplate restTemplate) {
+    public MealPlanService(RestTemplate restTemplate, String spoonacularApiKey, String spoonacularBaseUrl, String spoonacularMealPlanUrl) {
         this.restTemplate = restTemplate;
+        this.spoonacularApiKey = spoonacularApiKey;
+        this.spoonacularBaseUrl = spoonacularBaseUrl;
+        this.spoonacularMealPlanUrl = spoonacularMealPlanUrl;
     }
 
     @PostConstruct
